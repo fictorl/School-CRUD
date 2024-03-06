@@ -22,8 +22,7 @@ public class Aluno {
 
     public Aluno(){}
 
-    public Aluno(Long id, String nome, String ra, String email, BigDecimal nota1, BigDecimal nota2, BigDecimal nota3) {
-        this.id = id;
+    public Aluno(String nome, String ra, String email, BigDecimal nota1, BigDecimal nota2, BigDecimal nota3) {
         this.nome = nome;
         this.ra = ra;
         this.email = email;
