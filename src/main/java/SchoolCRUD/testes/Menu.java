@@ -196,7 +196,9 @@ public class Menu {
         EntityManager em = JPAUtil.getEntityManager();
         String jpql = "SELECT a FROM Aluno a";
         List<Aluno> alunos = em.createQuery(jpql, Aluno.class).getResultList();
-        try {
+        if (alunos.isEmpty()) {
+            System.out.println("Nenhum aluno encontrado na lista.");
+        } else {
             for (Aluno a : alunos) {
                 System.out.println("---------------------");
                 System.out.println(a.getNome());
@@ -206,8 +208,6 @@ public class Menu {
                 System.out.println(a.getNota2());
                 System.out.println(a.getNota3());
             }
-        }   catch(NoResultException e){
-                System.out.println("Nenhum aluno encontrado na lista. ");
         }
     }
 }
