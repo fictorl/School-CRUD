@@ -1,9 +1,11 @@
 package SchoolCRUD.testes;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Scanner;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Persistence;
 import SchoolCRUD.dao.AlunoDao;
 import SchoolCRUD.modelo.Aluno;
@@ -14,7 +16,6 @@ public class Menu {
     private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("School-CRUD");
 
     private static final EntityManager entityManager = entityManagerFactory.createEntityManager();
-    private static final AlunoDao alunoDao = new AlunoDao(entityManager);
 
     public static void chamarMenu() {
         boolean continuar = true;
@@ -97,9 +98,34 @@ public class Menu {
 
     }
 
-    private static void buscarAlunoPeloNome() {
 
+
+
+    public static void buscarAlunoPeloNome() {
+        EntityManager em = JPAUtil.getEntityManager();
+        System.out.println("Digite o nome do aluno: ");
+        String nome = scanner.nextLine();
+        Aluno a = new Aluno();
+
+        String jpql = "SELECT a FROM Aluno a WHERE a.nome = :n";
+
+        try {
+            a = em.createQuery(jpql, Aluno.class)
+                    .setParameter("n", nome)
+                    .getSingleResult();
+            System.out.println(a.getNome());
+            System.out.println(a.getRa());
+            System.out.println(a.getEmail());
+            System.out.println(a.getNota1());
+            System.out.println(a.getNota2());
+            System.out.println(a.getNota3());
+
+        } catch (NoResultException e) {
+            System.out.println("Nenhum aluno encontrado com o nome " + nome);
+        }
     }
+
+
 
     private static void listarAlunos() {
 

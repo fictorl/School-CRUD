@@ -12,4 +12,8 @@ public class AlunoDao {
     public void cadastrar (Aluno aluno){
         this.em.persist(aluno);
     }
+    public void excluir (Aluno aluno) { this.em.remove(aluno); }
+    public Aluno buscarPorNome(String nome) {
+        return em.find(Aluno.class, nome);
+    }
 }
