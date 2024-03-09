@@ -92,7 +92,29 @@ public class Menu {
     }
 
     private static void excluirAluno() {
+        EntityManager em = JPAUtil.getEntityManager();
 
+        System.out.println("Digite o nome do aluno que deseja Excluir: ");
+        String nome = scanner.nextLine();
+        String jpql = "SELECT a FROM Aluno a WHERE a.nome = :n";
+
+        try {
+            Aluno a = em.createQuery(jpql, Aluno.class)
+                    .setParameter("n", nome)
+                    .getSingleResult();
+
+            em.getTransaction().begin();
+            if (!em.contains(a)) {
+                a = em.merge(a);
+            }
+            em.remove(a);
+            em.getTransaction().commit();
+            em.close();
+            System.out.println("Aluno excluido com sucesso!");
+        } catch (NoResultException e) {
+            System.out.println("Nenhum aluno encontrado com o nome " + nome);
+            return;
+        }
     }
 
     private static void alterarAluno() {
