@@ -1,6 +1,7 @@
 package SchoolCRUD.testes;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import jakarta.persistence.EntityManager;
@@ -99,8 +100,6 @@ public class Menu {
     }
 
 
-
-
     public static void buscarAlunoPeloNome() {
         EntityManager em = JPAUtil.getEntityManager();
         System.out.println("Digite o nome do aluno: ");
@@ -126,8 +125,22 @@ public class Menu {
     }
 
 
-
     private static void listarAlunos() {
-
+        EntityManager em = JPAUtil.getEntityManager();
+        String jpql = "SELECT a FROM Aluno a";
+        List<Aluno> alunos = em.createQuery(jpql, Aluno.class).getResultList();
+        try {
+            for (Aluno a : alunos) {
+                System.out.println("---------------------");
+                System.out.println(a.getNome());
+                System.out.println(a.getRa());
+                System.out.println(a.getEmail());
+                System.out.println(a.getNota1());
+                System.out.println(a.getNota2());
+                System.out.println(a.getNota3());
+            }
+        }   catch(NoResultException e){
+                System.out.println("Nenhum aluno encontrado na lista. ");
+        }
     }
 }
