@@ -201,12 +201,24 @@ public class Menu {
         } else {
             for (Aluno a : alunos) {
                 System.out.println("---------------------");
-                System.out.println(a.getNome());
-                System.out.println(a.getRa());
-                System.out.println(a.getEmail());
-                System.out.println(a.getNota1());
-                System.out.println(a.getNota2());
-                System.out.println(a.getNota3());
+                System.out.println("Nome: " + a.getNome());
+                System.out.println("RA: " + a.getRa());
+                System.out.println("Email: " + a.getEmail());
+
+                BigDecimal soma = a.getNota1().add(a.getNota2()).add(a.getNota3());
+                BigDecimal quantidadeNotas = new BigDecimal(3);
+                BigDecimal media = soma.divide(quantidadeNotas, 2, BigDecimal.ROUND_UNNECESSARY);
+
+                System.out.println("Notas: " + a.getNota1() + " - " + a.getNota2() + " - " + a.getNota3());
+                System.out.println("Media = " + media);
+
+                if (media.compareTo(BigDecimal.valueOf(4)) < 0) {
+                    System.out.println("Situação: Reprovado");
+                } else if (media.compareTo(BigDecimal.valueOf(6)) < 0) {
+                    System.out.println("Situação: Recuperação");
+                } else {
+                    System.out.println("Situação: Aprovado");
+                }
             }
         }
     }

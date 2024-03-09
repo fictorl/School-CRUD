@@ -10,7 +10,7 @@
         <properties>
 
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:file:C:\Users\ariad\OneDrive\Área de Trabalho\PW3_JPA"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:file:C:\Users\ficto\OneDrive\Área de Trabalho\4 Semestre\PW3\School-CRUD"/>
             <property name="jakarta.persistence.jdbc.user" value="sa" />
             <property name="jakarta.persistence.jdbc.password" value="" />
 
