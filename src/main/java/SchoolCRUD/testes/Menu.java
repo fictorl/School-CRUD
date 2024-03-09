@@ -96,8 +96,53 @@ public class Menu {
     }
 
     private static void alterarAluno() {
+        EntityManager em = JPAUtil.getEntityManager();
+        System.out.println("Digite o nome do aluno que deseja alterar: ");
+        String nome = scanner.nextLine();
 
+        String jpql = "SELECT a FROM Aluno a WHERE a.nome = :n";
+
+        try {
+            Aluno aluno = em.createQuery(jpql, Aluno.class)
+                    .setParameter("n", nome)
+                    .getSingleResult();
+
+            System.out.println("Novo nome do aluno: ");
+            String novoNome = scanner.nextLine();
+            aluno.setNome(novoNome);
+
+            System.out.println("Novo RA do aluno: ");
+            String novoRa = scanner.nextLine();
+            aluno.setRa(novoRa);
+
+            System.out.println("Novo e-mail do aluno: ");
+            String novoEmail = scanner.nextLine();
+            aluno.setEmail(novoEmail);
+
+            System.out.println("Nova nota 1 do aluno: ");
+            BigDecimal novaNota1 = scanner.nextBigDecimal();
+            aluno.setNota1(novaNota1);
+
+            System.out.println("Nova nota 2 do aluno: ");
+            BigDecimal novaNota2 = scanner.nextBigDecimal();
+            aluno.setNota2(novaNota2);
+
+            System.out.println("Nova nota 3 do aluno: ");
+            BigDecimal novaNota3 = scanner.nextBigDecimal();
+            aluno.setNota3(novaNota3);
+
+            em.getTransaction().begin();
+            em.merge(aluno);
+            em.getTransaction().commit();
+
+            System.out.println("Aluno alterado com sucesso!");
+        } catch (NoResultException e) {
+            System.out.println("Nenhum aluno encontrado com o nome " + nome);
+        } finally {
+            em.close();
+        }
     }
+
 
 
     public static void buscarAlunoPeloNome() {
