@@ -207,7 +207,7 @@ public class Menu {
 
                 BigDecimal soma = a.getNota1().add(a.getNota2()).add(a.getNota3());
                 BigDecimal quantidadeNotas = new BigDecimal(3);
-                BigDecimal media = soma.divide(quantidadeNotas, 2, BigDecimal.ROUND_UNNECESSARY);
+                BigDecimal media = soma.divide(quantidadeNotas, 2, BigDecimal.ROUND_HALF_UP);
 
                 System.out.println("Notas: " + a.getNota1() + " - " + a.getNota2() + " - " + a.getNota3());
                 System.out.println("Media = " + media);
